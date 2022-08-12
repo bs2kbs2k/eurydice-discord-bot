@@ -1868,7 +1868,7 @@ esutils@^2.0.2:
 
 "eurydice@https://github.com/valadaptive/eurydice":
   version "1.0.0"
-  resolved "https://github.com/valadaptive/eurydice#8b9fb43d02909e412214896971622139acfe125a"
+  resolved "https://github.com/valadaptive/eurydice#4daa0363dcc61ccfdc4f8d7b67f12a656a6c9aa8"
 
 execa@^5.0.0:
   version "5.1.1"
