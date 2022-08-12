@@ -11,6 +11,7 @@ import {
 import { COMMAND } from './commands.js';
 import evaluate from 'eurydice/src/evaluate';
 import parse from 'eurydice/src/parse';
+import printValue from 'eurydice/src/print';
 
 class JsonResponse extends Response {
   constructor(body, init) {
@@ -55,7 +56,7 @@ router.post('/', async (request, env) => {
     switch (message.data.name.toLowerCase()) {
       case COMMAND.name.toLowerCase(): {
         console.log('handling evaluation request');
-        const result = JSON.stringify(evaluate(parse(message.data.options[0].value)));
+        const result = printValue(evaluate(parse(message.data.options[0].value)));
         return new JsonResponse({
           type: 4,
           data: {
