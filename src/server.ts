@@ -8,8 +8,9 @@ import {
   InteractionType,
   verifyKey,
 } from 'discord-interactions';
-import { AWW_COMMAND, INVITE_COMMAND } from './commands.js';
-import { getCuteUrl } from './reddit.js';
+import { COMMAND } from './commands.js';
+import evaluate from 'eurydice/src/evaluate';
+import parse from 'eurydice/src/parse';
 
 class JsonResponse extends Response {
   constructor(body, init) {
@@ -52,24 +53,13 @@ router.post('/', async (request, env) => {
   if (message.type === InteractionType.APPLICATION_COMMAND) {
     // Most user commands will come as `APPLICATION_COMMAND`.
     switch (message.data.name.toLowerCase()) {
-      case AWW_COMMAND.name.toLowerCase(): {
-        console.log('handling cute request');
-        const cuteUrl = await getCuteUrl();
+      case COMMAND.name.toLowerCase(): {
+        console.log('handling evaluation request');
+        const result = JSON.stringify(evaluate(parse(message.data.options[0].value)));
         return new JsonResponse({
           type: 4,
           data: {
-            content: cuteUrl,
-          },
-        });
-      }
-      case INVITE_COMMAND.name.toLowerCase(): {
-        const applicationId = env.DISCORD_APPLICATION_ID;
-        const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${applicationId}&scope=applications.commands`;
-        return new JsonResponse({
-          type: 4,
-          data: {
-            content: INVITE_URL,
-            flags: 64,
+            content: result,
           },
         });
       }

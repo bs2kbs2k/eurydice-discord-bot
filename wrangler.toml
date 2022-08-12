@@ -1,14 +1,13 @@
-name = "awwbot"
-main = "./src/server.js"
-type = "javascript"
+name = "eurydice-discord-bot"
+main = "./src/server.ts"
 compatibility_date="2022-02-26"
 
-account_id = "c21e5aacc2d33c52c2b6589adbe56dc0"
+account_id = "352f8084962a33cd92ca448b5aec6d5e"
 workers_dev = true
 
 [[rules]]
 type = "ESModule"
-globs = [ "**/*.js" ]
+globs = [ "**/*.ts" ]
 
 [env.dev]
 
